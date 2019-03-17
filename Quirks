@@ -1,0 +1,30 @@
+#!/bin/bash -eux
+Quirks() {
+    apt-get update
+    dpkg --configure -a
+    apt-get upgrade -y
+    apt-get install -y --no-install-recommends aptitude
+    AddQuirks
+    RemoveToxic
+}
+
+RemoveToxic() {
+    local toxic_packages=(
+	gnome-software-plugin-snap
+	snapd
+    )
+    aptitude purge -y "${toxic_packages[@]}"
+}
+
+AddQuirks() {
+    local quirk_packages=(
+	ntpdate
+	openssh-server
+	uptimed
+	vim
+    )
+    aptitude install -y "${quirk_packages[@]}"
+    update-alternatives --set editor /usr/bin/vim.basic
+}
+
+Quirks

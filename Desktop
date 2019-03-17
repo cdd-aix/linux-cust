@@ -1,0 +1,27 @@
+#!/bin/bash -eux
+zero=$(readlink -f "$0")
+zerodir="${zero%/*}"
+export PATH="$zerodir:/usr/bin:/usr/sbin:/bin:/sbin"
+InstallDesktop() {
+    Quirks
+    Desktop
+    exit 0
+}
+
+Desktop() {
+    local desktop_packages=(
+	fonts-noto
+	lxqt
+	openbox-lxde-session
+	xfce4-terminal
+	xfwm4
+	xfwm4-theme-breeze
+	xserver-xorg-input-synaptics-hwe-18.04
+    )
+    DEBIAN_FRONTEND=noninteractive aptitude install -y "${desktop_packages[@]}"
+    mkdir -p /etc/xdg/xdg-lxqt
+    ln -snf /usr/share/lxqt /etc/xdg/xdg-lxqt
+    # cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services/
+}
+
+InstallDesktop
