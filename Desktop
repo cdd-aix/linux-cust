@@ -11,8 +11,12 @@ InstallDesktop() {
 Desktop() {
     local desktop_packages=(
 	fonts-noto
+	libvdpau-va-gl1
 	lxqt
 	openbox-lxde-session
+	pavucontrol-qt
+	vdpauinfo
+	vlc
 	xfce4-terminal
 	xfwm4
 	xfwm4-theme-breeze
@@ -22,6 +26,13 @@ Desktop() {
     mkdir -p /etc/xdg/xdg-lxqt
     ln -snf /usr/share/lxqt /etc/xdg/xdg-lxqt
     # cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services/
+    DisableAccelerometerTilt
+}
+
+DisableAccelerometerTilt() {
+    systemctl stop iio-sensor-proxy.service
+    systemctl disable iio-sensor-proxy.server
+    apt-get remove iio-sensor-proxy
 }
 
 InstallDesktop
