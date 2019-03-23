@@ -3,53 +3,28 @@ zero=$(readlink -f "$0")
 zerodir="${zero%/*}"
 export PATH="$zerodir:/usr/bin:/usr/sbin:/bin:/sbin"
 InstallDevDesktop() {
-    Quirks
     Desktop
+    InstallDevTools
     exit 0
 }
 
-Quirks() {
-    apt-get update
-    dpkg --configure -a
-    apt-get upgrade -y
-    apt-get install -y --no-install-recommends aptitude
-    AddQuirks
-    RemoveToxic
-}
-
-RemoveToxic() {
-    local toxic_packages=(
-	gnome-software-plugin-snap
-	snapd
+InstallDevTools() {
+    # Linters listed at http://www.flycheck.org/en/latest/languages.html
+    local packages=(
+	emacs25
+	git
+	groovy
+	jsonlint
+	python2.7
+	python-flake8
+	python3
+	python3-flake8
+	# Look at mypy
+	rubocop
+	shellcheck
+	tidy
     )
-    aptitude purge -y "${toxic_packages[@]}"
-}
-
-AddQuirks() {
-    local quirk_packages=(
-	ntpdate
-	openssh-server
-	uptimed
-	vim
-    )
-    aptitude install -y "${quirk_packages[@]}"
-    update-alternatives --set editor /usr/bin/vim.basic
-}
-
-Desktop() {
-    local desktop_packages=(
-	fonts-noto
-	lxqt
-	openbox-lxde-session
-	xfce4-terminal
-	xfwm4
-	xfwm4-theme-breeze
-	xserver-xorg-input-synaptics-hwe-18.04
-    )
-    DEBIAN_FRONTEND=noninteractive aptitude install -y "${desktop_packages[@]}"
-    mkdir -p /etc/xdg/xdg-lxqt
-    ln -snf /usr/share/lxqt /etc/xdg/xdg-lxqt
-    # cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services/
+    aptitude install -y "${packages[@]}"
 }
 
 InstallDevDesktop
