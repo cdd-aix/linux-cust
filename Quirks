@@ -18,6 +18,7 @@ RemoveToxic() {
 
 AddQuirks() {
     local quirk_packages=(
+	net-tools
 	ntpdate
 	openssh-server
 	uptimed
