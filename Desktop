@@ -30,9 +30,9 @@ Desktop() {
 }
 
 DisableAccelerometerTilt() {
-    systemctl stop iio-sensor-proxy.service
-    systemctl disable iio-sensor-proxy.server
-    apt-get remove iio-sensor-proxy
+    systemctl stop iio-sensor-proxy.service || :
+    systemctl disable iio-sensor-proxy.server || :
+    apt-get remove -y iio-sensor-proxy
 }
 
 InstallDesktop
