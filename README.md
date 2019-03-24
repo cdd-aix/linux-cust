@@ -21,6 +21,10 @@ Todo
 * quicktile and the required wnck library
 * my emacs config
 * mypy
+* User global .gitignore
+  * .#* (emacs backup files)
+* User global git config
+  * git config credential.helper 'cache'
 
 ## Desktop
 
@@ -72,4 +76,3 @@ Desktop for extended family members
 * google-chrome because it has less lag showing church live streaming
 * libreoffice
 
-## 
