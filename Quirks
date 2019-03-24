@@ -18,6 +18,7 @@ RemoveToxic() {
 
 AddQuirks() {
     local quirk_packages=(
+	curl
 	default-jre-headless
 	net-tools
 	ntpdate
