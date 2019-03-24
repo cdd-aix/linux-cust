@@ -5,6 +5,7 @@ export PATH="$zerodir:/usr/bin:/usr/sbin:/bin:/sbin"
 InstallDevDesktop() {
     Desktop
     InstallDevTools
+    InstallVMWareTools
     exit 0
 }
 
@@ -25,6 +26,27 @@ InstallDevTools() {
 	tidy
     )
     aptitude install -y "${packages[@]}"
+}
+
+InstallVMWareTools() {
+    InstallOVFTool
+    InstallPowerCLI
+}
+
+InstallOVFTool(){
+    bash "$zerodir/blobs/VMware-ovftool-4.3.0-10104578-lin.x86_64.bundle" --eulas-agreed --console --required
+}
+
+InstallPowerCLI() {
+    InstallPowerShell
+    pwsh -c "Install-Module -Force -Name VMware.PowerCLI"
+}
+
+InstallPowerShell() {
+    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+    curl -o /etc/apt/sources.list.d/microsoft.list https://packages.microsoft.com/config/ubuntu/18.04/prod.list
+    aptitude update
+    DEBIAN_FRONTEND=noninteractive aptitude install -y powershell powershell-preview
 }
 
 InstallDevDesktop
