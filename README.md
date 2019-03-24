@@ -6,6 +6,7 @@ Collection of scripts to customize a Linux host for specific purposes
 
 My preferred environment for a development desktop
 * Desktop
+* VMWareTools
 * emacs25
 * git
 * groovy for Jenkinsfile checking
@@ -21,15 +22,10 @@ Todo
 * my emacs config
 * mypy
 
-## FamilyDesktop
-
-Desktop for extended family members
-* google-chrome because it has less lag showing church live streaming
-* libreoffice
-
 ## Desktop
 
 Common desktop requirements
+* Quirks
 * fonts-noto so obscure unicode can resolve
 * libvdpau-va-gl1 for accelerated video playback
 * lxqt
@@ -61,3 +57,19 @@ Used by all environments
 Remove
 * gnome-software-plugin-snap
 * snapd because the docker snap did not behave as expected
+
+## VMWareTools
+
+Provide tools to manage vmware from Linux CLI
+* [ovftool](https://code.vmware.com/web/tool/4.3.0/ovf)
+* [PowerCLI](https://www.altaro.com/vmware/install-powercli-ubuntu-linux-18-04-lts/)
+  * Install Powershell Preview for Linux
+  * In pwsh-preview (run as root) "Install-Module -Name VMware.PowerCLI"
+
+## FamilyDesktop
+
+Desktop for extended family members
+* google-chrome because it has less lag showing church live streaming
+* libreoffice
+
+## 
