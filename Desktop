@@ -10,6 +10,8 @@ InstallDesktop() {
 
 Desktop() {
     DisableAccelerometerTilt
+    # Minor glitch installing openoffice when default-jre was not already installed
+    DEBIAN_FRONTEND=noninteractive aptitude instally -y default-jre-headless
     local desktop_packages=(
 	fonts-noto
 	libvdpau-va-gl1
